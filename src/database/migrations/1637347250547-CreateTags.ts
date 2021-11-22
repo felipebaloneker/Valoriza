@@ -1,4 +1,4 @@
-import {MigrationInterface, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
 export class CreateTags1637347250547 implements MigrationInterface {
 
@@ -7,13 +7,32 @@ export class CreateTags1637347250547 implements MigrationInterface {
             new Table({
                 name: "tags",
                 columns: [
-                    
+                    {
+                        name:'id',
+                        type:'uuid',
+                        isPrimary: true
+                    },
+                    {
+                        name:'name',
+                        type:'varchar'
+                    },
+                    {
+                        name:'created_at',
+                        type:'timestamp',
+                        default:'now()'
+                    },
+                    {
+                        name:'updated_at',
+                        type:'timestamp',
+                        default:'now()'
+                    }
                 ]
             })
         )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable("tags");
     }
 
 }
