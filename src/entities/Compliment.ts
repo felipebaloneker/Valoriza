@@ -1,11 +1,11 @@
-import {Entity, PrimaryColumn, Column, CreatedDateColumn, JoinColumn, ManyToOne} from 'typeorm'
+import {Entity, PrimaryColumn, Column, CreateDateColumn, JoinColumn, ManyToOne} from 'typeorm'
 import {v4 as uuid} from 'uuid'
 import { Tag } from "./Tag"
 import { User } from "./User"
 
 @Entity("Compliments")
 class Compliment{
-    @PrimaryColumn
+    @PrimaryColumn()
     readonly id: string;
 
     @Column()
@@ -13,14 +13,14 @@ class Compliment{
 
     @JoinColumn({name:"user_sender"})
     @ManyToOne(() => User)
-    userSender: User
+    userSender: User;
 
     @Column()
     user_receiver: string;
     
     @JoinColumn({name:"user_receiver"})
     @ManyToOne(() => User)
-    userReceiver: User
+    userReceiver: User;
 
     @Column()
     tag_id: string;
@@ -32,7 +32,7 @@ class Compliment{
     @Column()
     message: string;
 
-    @CreatedDateColumn()
+    @CreateDateColumn()
     created_at: Date;
 
     constructor(){
